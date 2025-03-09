@@ -18,7 +18,8 @@ pipeline {
         stage('Test') {
             steps {
                 // Run tests (optional; add tests if applicable)
-                sh 'echo "No tests configured for this Python app"'
+                sh "python3 app.py"
+
             }
         }
         stage('Build Docker Image') {
