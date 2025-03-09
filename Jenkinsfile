@@ -1,63 +1,54 @@
 pipeline {
     agent any
-    environment {
-        // Define environment variables
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') // Docker Hub credentials ID
-        AZURE_CREDENTIALS = credentials('azure-credentials') // Azure Service Principal credentials ID
-        DOCKER_IMAGE = "tiwariadarsh/python_app"
-        AKS_CLUSTER_NAME = "<aks-cluster-name>"
-        AKS_RESOURCE_GROUP = "<resource-group>"
-    }
-    stages {
-        stage('Checkout') {
-            steps {
-                // Checkout code from GitHub
-                git branch: 'main', url: 'https://github.com/adarshdev-cell/python_app.git'
-            }
-        }
-        stage('Test') {
-            steps {
-                // Run tests (optional; add tests if applicable)
-                sh "python3 app.py"
 
-            }
-        }
-        stage('Build Docker Image') {
-            steps {
-                // Build Docker image
-                sh "docker build -t ${DOCKER_IMAGE}:${env.BUILD_NUMBER} ."
-            }
-        }
-        stage('Push Docker Image') {
-            steps {
-                // Login to Docker Hub and push the image
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                sh "docker push ${DOCKER_IMAGE}:${env.BUILD_NUMBER}"
-            }
-        }
-        stage('Deploy to AKS') {
-            steps {
-                // Use Azure CLI to set AKS context and deploy
-                withCredentials([azureServicePrincipal('azure-credentials')]) {
-                    sh '''
-                    az login --service-principal -u $AZURE_CREDENTIALS_CLIENT_ID -p $AZURE_CREDENTIALS_CLIENT_SECRET --tenant $AZURE_CREDENTIALS_TENANT_ID
-                    az aks get-credentials --resource-group $AKS_RESOURCE_GROUP --name $AKS_CLUSTER_NAME
-                    kubectl set image deployment/my-python-app my-python-app=${DOCKER_IMAGE}:${env.BUILD_NUMBER} --namespace default
-                    '''
-                }
-            }
-        }
+    environment {
+        REPO_URL = 'https://github.com/adarshdev-cell/Automated-Python-web-App.git'
+        APP_DIR = '/home/adarsh/my-app'
+        SERVER_USER = 'JenkinsVM'
+        SERVER_IP = '13.71.21.221'
     }
-    post {
-        always {
-            // Clean up Docker images on Jenkins agent
-            sh "docker rmi ${DOCKER_IMAGE}:${env.BUILD_NUMBER} || true"
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: "${REPO_URL}"
+            }
         }
-        success {
-            echo 'Pipeline completed successfully!'
+
+        stage('Install Dependencies') {
+            steps {
+                sh '''
+                cd ${WORKSPACE}
+                python3 -m venv venv
+                source venv/bin/activate
+                pip install -r requirements.txt
+                '''
+            }
         }
-        failure {
-            echo 'Pipeline failed!'
+
+        stage('Deploy to Server') {
+            steps {
+                sshPublisher(
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: "flask-server",
+                            transfers: [
+                                sshTransfer(
+                                    sourceFiles: '**',
+                                    removePrefix: '',
+                                    remoteDirectory: '${APP_DIR}',
+                                    execCommand: '''
+                                    cd ${APP_DIR}
+                                    source venv/bin/activate
+                                    pip install -r requirements.txt
+                                    systemctl restart flaskapp
+                                    '''
+                                )
+                            ]
+                        )
+                    ]
+                )
+            }
         }
     }
 }
