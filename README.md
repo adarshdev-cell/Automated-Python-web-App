@@ -76,7 +76,64 @@ This repository contains a Flask web application with an automated CI/CD pipelin
       
    2. Clone this repository:
       ```bash
+      git clone https://github.com/adarshdev-cell/Automated-Python-web-App.git
+
+      cd Automated-Python-web-App
+      ```
+
+  ### Step 2: Install Python and Dependencies
+
+   1. Install Python and pip:
+      ```bash
+      sudo apt install python3 python3-pip python3-venv -y
+      ```
+
+   2. Create a virtual environment and activate it:
+      ```bash
+      python3 -m venv venv
+      source venv/bin/activate
+      ```
       
+   3. Install the required dependencies:
+      ```bash
+      pip install -r requirements.txt
+      ```
+
+      
+   ### Step 3: Create a flask application 
+
+   1. app.py
+      ```bash
+        from flask import Flask
+
+        app = Flask(__name__)
+
+        @app.route('/')
+        def hello():
+            return "Hello, this is a Python Flask app."
+
+        if __name__ == "__main__":
+          app.run(host='0.0.0.0', port=5000)
+      ```
+        
+        
+    
+
+    
+
+   
+
+    
+
+
+      
+
+
+
+
+
+    
+
 
  
 
