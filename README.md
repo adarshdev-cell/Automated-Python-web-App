@@ -165,7 +165,36 @@ This repository contains a Flask web application with an automated CI/CD pipelin
 
    6. Unlocking Jenkins
 
-      Browse with ```bash  http://localhost:8080 ``` and you will get interface like this:
+      Browse with http://<vm1-public-ip>:8080 and you will get interface and run this command to see the Administrator Password
+       ```bash
+        cat /var/jenkins_home/secrets/initialAdminPassword
+       ```
+      Copy the password and paste it into the Jenkins web interface and install suggested plugins
+
+      Create a new Jenkins user and password
+
+  ### Step 3: Install Jenkins Plugins
+
+   1. In Jenkins, go to Manage Jenkins > Manage Plugins.
+
+   2. Install the following plugins:
+      a. GitHub Integration Plugin: For GitHub webhook integration.
+
+Pipeline Plugin: For defining Jenkins pipelines.
+
+SSH Agent Plugin: For SSH access to VM2 during deployment.
+
+
+
+    
+
+      
+      
+       
+
+       
+       
+       
 
       
       
