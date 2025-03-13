@@ -122,7 +122,19 @@ This repository contains a Flask web application with an automated CI/CD pipelin
        flask --version
 
        ```
-   3. Open a web browser on your local machine and navigate to **http://<vm1-public-ip>:5000** to verify the Flask app is running. You should see the application's output.
+   3. Open a web browser on your local machine and navigate to http://<vm1-public-ip>:5000 to verify the Flask app is running. You should see the application's output.
+
+   4. Stop the Flask app by pressing Ctrl + C in the terminal.
+
+
+# Setup Jenkins on VM1
+
+
+
+
+
+
+      
 
       
 
