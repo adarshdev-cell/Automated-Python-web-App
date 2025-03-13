@@ -22,9 +22,9 @@ This repository contains a Flask web application with an automated CI/CD pipelin
 ## Architecture Overview
 
 
-   1 **VM1 (Jenkins + Flask Host)**: Hosts Jenkins for the CI/CD pipeline and the Flask application source code. Jenkins automates the build, test, and deployment process.
+   1. **VM1 (Jenkins + Flask Host)**: Hosts Jenkins for the CI/CD pipeline and the Flask application source code. Jenkins automates the build, test, and deployment process.
 
-   2 **VM2 (User Access)**: Host the deployed Flask application, accessible to users via a web browser.
+   2. **VM2 (User Access)**: Host the deployed Flask application, accessible to users via a web browser.
 
    A GitHub webhook triggers the Jenkins pipeline whenever code is pushed to the repository, automating the deployment process.
    
@@ -38,9 +38,24 @@ This repository contains a Flask web application with an automated CI/CD pipelin
     
    2. Create two Ubuntu 20.04 LTS VMs:
 
-       VM1: Name it Jenkins-Flask-VM.
+        VM1: Name it Jenkins-Flask-VM.
       
-       VM2: Name it Flask-Web-VM.
+        VM2: Name it Flask-Web-VM.
+
+   3. Configure the VMs:
+      
+      a. Choose a VM size (e.g., Standard_D2s_v3 for basic testing).
+
+      b. Set up a public IP address for both VMs.
+
+      c. Add inbound ports in the Network Security Group (NSG):
+      
+         VM1: Port 22 (SSH), Port 8080 (Jenkins), Port 5000 (Flask development, optional).
+      
+         VM2: Port 22 (SSH), Port 5000 (Flask application).
+
+
+      
 
      
    
