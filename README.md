@@ -115,7 +115,21 @@ This repository contains a Flask web application with an automated CI/CD pipelin
         if __name__ == "__main__":
           app.run(host='0.0.0.0', port=5000)
       ```
-        
+
+   2. Install Flask
+       ```bash
+       pip install Flask
+       flask --version
+
+       ```
+   3. Open a web browser on your local machine and navigate to **http://<vm1-public-ip>:5000** to verify the Flask app is running. You should see the application's output.
+
+      
+
+
+    
+
+   
         
     
 
