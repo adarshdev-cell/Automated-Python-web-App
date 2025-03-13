@@ -284,6 +284,28 @@ This repository contains a Flask web application with an automated CI/CD pipelin
 
         ```
 
+  ### Add credentials 
+
+   Go to Dashboard >> Manage Jenkins >> Credentials:
+   
+   1. Add credentials for the  second  Azure VM.
+
+   2. Add credentials for the GitHub repository.
+
+   3. Add credentials flask private SSH key.
+
+
+   **Before updating the flask app.py code**:
+
+   You can see the output on port 5000 with the URL: "your-vm-ip:5000".
+
+   **After updating the app.py**, you can see the different output on port 5000 with the same URL, and you can also check your build pipeline.
+
+
+   Thanks!
+
+   
+
 
 
       
