@@ -60,7 +60,16 @@ This repository contains a Flask web application with an automated CI/CD pipelin
       ```bash
       ssh -i <path-to-private-key> azureuser@<vm-public-ip>
       ```
-      
+   2. Update the VMs:
+      ```bash
+      sudo apt update && sudo apt upgrade -y
+      ```
+
+ ## Setup Flask Application on VM1
+
+   
+
+  
 
 
      
