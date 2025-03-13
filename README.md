@@ -4,7 +4,7 @@ This repository contains a Flask web application with an automated CI/CD pipelin
 
 ## Prerequisites
 
-####1 An Azure account with an active subscription.
+#### 1 An Azure account with an active subscription.
 
 A GitHub account and this repository forked or cloned.
 
