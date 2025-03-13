@@ -18,11 +18,11 @@ This repository contains a Flask web application with an automated CI/CD pipelin
 
 ## Architecture Overview
 
-  ## 1 **VM1 (Jenkins + Flask Host)**:   Hosts Jenkins for the CI/CD pipeline and the Flask application source code. Jenkins automates the build, test, and deployment process.
+   1 **VM1 (Jenkins + Flask Host)**: Hosts Jenkins for the CI/CD pipeline and the Flask application source code. Jenkins automates the build, test, and deployment process.
 
-  ## 2 **VM2 (User Access)**:   Host the deployed Flask application, accessible to users via a web browser.
+   2 **VM2 (User Access)**: Host the deployed Flask application, accessible to users via a web browser.
 
-  A GitHub webhook triggers the Jenkins pipeline whenever code is pushed to the repository, automating the deployment process.
+   A GitHub webhook triggers the Jenkins pipeline whenever code is pushed to the repository, automating the deployment process.
 
 
 
