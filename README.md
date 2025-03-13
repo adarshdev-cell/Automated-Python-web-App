@@ -65,9 +65,24 @@ This repository contains a Flask web application with an automated CI/CD pipelin
       sudo apt update && sudo apt upgrade -y
       ```
 
- ## Setup Flask Application on VM1
+## Setup Flask Application on VM1
 
-   
+  ### Step 1: Clone the Repository
+
+   1. Install Git:
+      ```bash
+      sudo apt install git -y
+      ```
+      
+   2. Clone this repository:
+      ```bash
+      
+
+ 
+
+
+
+
 
   
 
