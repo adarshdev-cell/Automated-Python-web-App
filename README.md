@@ -163,6 +163,11 @@ This repository contains a Flask web application with an automated CI/CD pipelin
       sudo systemctl status jenkins
       ```
 
+   6. Unlocking Jenkins
+
+      Browse with ```bash  http://localhost:8080 ``` and you will get interface like this:
+
+      
       
 
 
