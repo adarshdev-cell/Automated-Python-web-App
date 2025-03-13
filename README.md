@@ -169,20 +169,126 @@ This repository contains a Flask web application with an automated CI/CD pipelin
        ```bash
         cat /var/jenkins_home/secrets/initialAdminPassword
        ```
-      Copy the password and paste it into the Jenkins web interface and install suggested plugins
+      Copy the password and paste it into the Jenkins web interface and install the suggested plugins.
 
-      Create a new Jenkins user and password
+      Create a new Jenkins user and password.
 
   ### Step 3: Install Jenkins Plugins
 
    1. In Jenkins, go to Manage Jenkins > Manage Plugins.
 
    2. Install the following plugins:
-      a. GitHub Integration Plugin: For GitHub webhook integration.
+      
+      a. **GitHub Integration Plugin**: For GitHub webhook integration.
 
-Pipeline Plugin: For defining Jenkins pipelines.
+      b. **Pipeline Plugin**: For defining Jenkins pipelines.
 
-SSH Agent Plugin: For SSH access to VM2 during deployment.
+      c. **SSH Agent Plugin**: For SSH access to VM2 during deployment.
+
+
+
+  ### Configure GitHub Webhook
+
+
+   1. Go to your GitHub Repository and access the webhook in settings:
+      
+   2. Add new webhook:
+      ```bash
+      http://your-jenkins-server-ip:8080/github-webhook/
+      ```
+   3. Set content type >> Choose application/json.
+   
+   4. Choose event to trigger >> Just the push event.
+    
+   5. Save the webhook with add webhook.
+
+  ### Creating Jenkins pipeline for GitHub changes
+
+   1. Go to the Jenkins dashboard and select a create item or job.
+    
+   2. Enter the item name and select the pipeline and click ok.
+     
+   4. Item configuration:
+
+      a. Click GitHub hook trigger for GITscm polling.
+      b. In pipeline:
+      
+        ```bash
+        pipeline {
+             agent any
+
+              environment {
+                  VM_USER = 'tiwari'
+                  VM_IP = 'your-VM-IP'
+              }
+
+              stages {
+        
+                 stage('Hello') {
+                    steps {
+                       echo 'Hello World'
+                    }
+                 }
+
+        
+                  stage('Clone Repository') {
+                      steps {
+                          git branch: 'main', credentialsId: 'Your-github-credential-id', url: 'https://github.com/adarshdev-cell/Automated-Python-web-App.git'
+                      }
+                  }
+
+        
+                   stage('Install Dependencies') {
+                      steps {
+                          sh '''
+                              python3 -m venv venv
+                              . venv/bin/activate  # Use '.' instead of 'source'
+                              pip install --upgrade pip
+                              pip install -r requirements.txt
+                          '''
+                       }
+                    }
+
+                    stage('Build Application') {
+                        steps {
+                            sh '''
+                                . venv/bin/activate
+                                # python -m compileall .  # Optional: Precompile Python files
+                            '''
+                         }
+                     }
+        
+                     stage('Deploy') {
+                         steps {
+                                 script {
+                                     withCredentials([usernamePassword(credentialsId: 'azure-vm-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                                         sh '''
+                                         sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@your-VM-IP "echo SSH connection successful"
+                                         '''
+                                      }
+                                  }
+                          }
+                      }
+                 }
+    
+                 post {
+                         success {
+                             echo 'Deployment successful!'
+                         }
+                         failure {
+                             echo 'Deployment failed. Check logs for errors.'
+                         }
+                 }
+    
+         }
+
+        ```
+
+
+
+      
+
+
 
 
 
