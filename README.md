@@ -127,7 +127,43 @@ This repository contains a Flask web application with an automated CI/CD pipelin
    4. Stop the Flask app by pressing Ctrl + C in the terminal.
 
 
-# Setup Jenkins on VM1
+## Setup Jenkins on VM1
+
+  ### Step 1: Install Jenkins for  Ubuntu Linux
+   
+   1. Install OpenJDK 17 and check the installation
+      ```bash
+        sudo apt update
+        sudo apt install fontconfig openjdk-17-jre
+        java -version
+        openjdk version "17.0.13" 2024-10-15
+        OpenJDK Runtime Environment (build 17.0.13+11-Debian-2)
+        OpenJDK 64-Bit Server VM (build 17.0.13+11-Debian-2, mixed mode, sharing)
+      ```
+   2. Install Jenkins
+      ```bash
+        sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+        https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+        echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+        https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+        /etc/apt/sources.list.d/jenkins.list > /dev/null
+        sudo apt-get update
+        sudo apt-get install jenkins
+      ```
+   3. Enable Jenkins Service
+      ```bash
+      sudo systemctl enable jenkins
+      ```
+   4. Start Jenkins Service
+      ```bash
+      sudo systemctl start jenkins
+      ```
+   5. Check Jenkins Status
+      ```bash
+      sudo systemctl status jenkins
+      ```
+
+      
 
 
 
