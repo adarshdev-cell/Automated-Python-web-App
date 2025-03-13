@@ -50,9 +50,24 @@ This repository contains a Flask web application with an automated CI/CD pipelin
 
       c. Add inbound ports in the Network Security Group (NSG):
       
-         VM1: Port 22 (SSH), Port 8080 (Jenkins), Port 5000 (Flask development, optional).
+         VM1: Port 22 (SSH), Port 8080 (Jenkins), Port 5000 (Flask development).
       
          VM2: Port 22 (SSH), Port 5000 (Flask application).
+
+
+  ### Step 2: SSH into VM:
+   1. Use an SSH client to connect to both VMs:
+      ```bash
+      ssh -i <path-to-private-key> azureuser@<vm-public-ip>
+      ```
+      
+
+
+     
+
+
+
+
 
 
       
