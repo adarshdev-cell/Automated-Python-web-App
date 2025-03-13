@@ -28,10 +28,12 @@ This repository contains a Flask web application with an automated CI/CD pipelin
 
   ### Step 1: Provision Azure VMs
     
-   1 Log in to the Azure Portal.
-   2 Create two Ubuntu 20.04 LTS VMs:
-     VM1: Name it Jenkins-Flask-VM.
-     VM2: Name it Flask-Web-VM.
+   1. Log in to the Azure Portal.
+    
+   2. Create two Ubuntu 20.04 LTS VMs:
+
+       VM1: Name it Jenkins-Flask-VM.
+       VM2: Name it Flask-Web-VM.
 
      
    
