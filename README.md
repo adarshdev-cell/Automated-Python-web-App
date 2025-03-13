@@ -4,17 +4,17 @@ This repository contains a Flask web application with an automated CI/CD pipelin
 
 ## Prerequisites
 
-#### 1 An Azure account with an active subscription.
-
-A GitHub account and this repository forked or cloned.
-
-Two Azure VMs running Ubuntu 24.0 LTS or later.
-
-SSH access to both VMs.
-
-Python 3.x installed on both VMs.
-
-requirements.txt file listing Flask dependencies.
+  An Azure account with an active subscription.
+  
+  A GitHub account and this repository forked or cloned.
+  
+  Two Azure VMs running Ubuntu 24.0 LTS or later.
+  
+  SSH access to both VMs.
+  
+  Python 3.x installed on both VMs.
+  
+  requirements.txt file listing Flask dependencies.
 
 
 
