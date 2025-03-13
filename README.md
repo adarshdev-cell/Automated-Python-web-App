@@ -202,6 +202,33 @@ This repository contains a Flask web application with an automated CI/CD pipelin
     
    5. Save the webhook with add webhook.
 
+
+  ### Setup SSH connection with in two Azure Server:
+
+   To allow the first VM to connect to the second VM (the one showing Flask output), copy the public key to the second VM.
+
+   1. Manually copy the key:
+      
+      ```bash
+      cat ~/.ssh/id_rsa.pub
+      ```
+
+   2. Copy the output and paste it into the second VM in the file:
+      ```bash
+
+      nano ~/.ssh/authorized_keys
+      ```
+      
+  3. Set permissions:
+     ```bash
+     chmod 600 ~/.ssh/authorized_keys
+     ```
+     
+  4. Test SSH Connection:
+     ```bash
+     ssh user@second-VM-server-ip
+     ```
+
   ### Creating Jenkins pipeline for GitHub changes
 
    1. Go to the Jenkins dashboard and select a create item or job.
